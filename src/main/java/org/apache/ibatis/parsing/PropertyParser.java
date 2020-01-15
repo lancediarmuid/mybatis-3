@@ -46,13 +46,18 @@ public class PropertyParser {
   private static final String ENABLE_DEFAULT_VALUE = "false";
   private static final String DEFAULT_VALUE_SEPARATOR = ":";
 
+  // 构造方法，修饰符为 private ，禁止构造 PropertyParser 对象，因为它是一个静态方法的工具类。
   private PropertyParser() {
     // Prevent Instantiation
   }
 
+  // 基于 variables 变量，替换 string 字符串中的动态属性，并返回结果。
   public static String parse(String string, Properties variables) {
+    // 创建 VariableTokenHandler 对象
     VariableTokenHandler handler = new VariableTokenHandler(variables);
+    // 创建GenericTokenParser 对象
     GenericTokenParser parser = new GenericTokenParser("${", "}", handler);
+    // 进行解析
     return parser.parse(string);
   }
 
